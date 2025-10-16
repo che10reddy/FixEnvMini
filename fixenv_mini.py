@@ -65,7 +65,7 @@ if "conflicts" in st.session_state:
 # -----------------------------
 if st.session_state.get("conflicts"):
     st.markdown("---")
-    st.subheader("Step 3️⃣  AI explanation")
+    st.subheader("Step 3️⃣  AI Explanation & Suggested Fix Preview")
 
     if st.button("💡 Explain with AI"):
         client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -80,9 +80,21 @@ if st.session_state.get("conflicts"):
             )
         ai_explanation = response.choices[0].message.content
         st.session_state["ai_explanation"] = ai_explanation
-        st.success("🧠 AI explanation")
+
+        # ✅ Show AI explanation first
+        st.success("🧠 AI Explanation")
         st.write(ai_explanation)
 
+        # ✅ Then show diff preview *after* explanation
+        st.markdown("---")
+        st.subheader("Step 4️⃣  Suggested Fix Preview")
+
+        lines = st.session_state.get("lines", [])
+        new_lines = [l.replace("==", "==latest") for l in lines]
+        diff = difflib.unified_diff(
+            lines, new_lines, fromfile="original", tofile="suggested", lineterm=""
+        )
+        st.code("\n".join(diff) or "# No changes suggested")
 # -----------------------------
 # Step 4: Suggested Fix Preview
 # -----------------------------
