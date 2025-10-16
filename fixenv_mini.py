@@ -6,13 +6,13 @@ import difflib
 # Title & Branding
 # -----------------------------
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
-st.title("FixEnv Mini")
+st.title("🧩 FixEnv Mini")
 st.caption("AI-powered environment conflict detector")
 
 st.markdown("---")
 
 # -----------------------------
-# Step 1: Input Section
+# Step 1: Input
 # -----------------------------
 st.subheader("Step 1️⃣  Paste your requirements.txt content")
 content = st.text_area(
@@ -22,43 +22,50 @@ content = st.text_area(
     placeholder="e.g., numpy==1.25\npandas==2.0.3\nmatplotlib==3.7.1"
 )
 
-# Initialize placeholders for later steps
-conflicts = []
-ai_explanation = ""
+# keep content available across steps
+st.session_state["content"] = content
 
 st.markdown("---")
 
 # -----------------------------
-# Step 2: Detect Conflicts
+# Step 2: Detect Conflicts  ✅ now visible
 # -----------------------------
-if st.button("🔍 Detect Conflicts"):
+st.subheader("Step 2️⃣  Detect conflicts")
+detect_clicked = st.button("🔍 Detect Conflicts")
+
+if detect_clicked:
     lines = [l.strip() for l in content.splitlines() if "==" in l]
     pkgs = {}
+    conflicts = []
 
     for line in lines:
         try:
-            name, ver = line.split("==")
+            name, ver = line.split("==", maxsplit=1)
             if name in pkgs and pkgs[name] != ver:
                 conflicts.append(f"{name}: {pkgs[name]} vs {ver}")
             pkgs[name] = ver
-        except:
+        except Exception:
+            # ignore malformed lines for demo
             pass
 
-    if conflicts:
+    st.session_state["lines"] = lines
+    st.session_state["conflicts"] = conflicts
+
+# Show detection results (after first click)
+if "conflicts" in st.session_state:
+    if st.session_state["conflicts"]:
         st.error("⚠️ Conflicts detected:")
-        for c in conflicts:
+        for c in st.session_state["conflicts"]:
             st.markdown(f"- `{c}`")
-        st.session_state["conflicts"] = conflicts
     else:
         st.success("✅ No version conflicts detected!")
-        st.session_state["conflicts"] = []
 
 # -----------------------------
 # Step 3: AI Explanation
 # -----------------------------
-if "conflicts" in st.session_state and st.session_state["conflicts"]:
+if st.session_state.get("conflicts"):
     st.markdown("---")
-    st.subheader("Step 3️⃣  AI Explanation")
+    st.subheader("Step 3️⃣  AI explanation")
 
     if st.button("💡 Explain with AI"):
         client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -69,39 +76,37 @@ if "conflicts" in st.session_state and st.session_state["conflicts"]:
         with st.spinner("Contacting AI assistant..."):
             response = client.chat.completions.create(
                 model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}]
+                messages=[{"role": "user", "content": prompt}],
             )
         ai_explanation = response.choices[0].message.content
-        st.success("🧠 AI Explanation:")
-        st.write(ai_explanation)
         st.session_state["ai_explanation"] = ai_explanation
+        st.success("🧠 AI explanation")
+        st.write(ai_explanation)
 
 # -----------------------------
-# Step 4: Diff Preview
+# Step 4: Suggested Fix Preview
 # -----------------------------
-if "conflicts" in st.session_state and st.session_state["conflicts"]:
+if st.session_state.get("conflicts"):
     st.markdown("---")
-    st.subheader("Step 4️⃣  Suggested Fix Preview")
-
-    lines = [l.strip() for l in content.splitlines() if "==" in l]
-    new_lines = [l.replace("==", "==latest") for l in lines]  # simple example
+    st.subheader("Step 4️⃣  Suggested fix preview")
+    lines = st.session_state.get("lines", [])
+    # simple demo suggestion: mark as "latest"
+    new_lines = [l.replace("==", "==latest") for l in lines]
     diff = difflib.unified_diff(
         lines, new_lines, fromfile="original", tofile="suggested", lineterm=""
     )
-    st.code("\n".join(diff))
+    st.code("\n".join(diff) or "# No changes suggested")
 
 # -----------------------------
 # Step 5: Snapshot Download
 # -----------------------------
-if "ai_explanation" in st.session_state and st.session_state["ai_explanation"]:
-    import io, zipfile
-
+if st.session_state.get("ai_explanation"):
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w") as z:
-        z.writestr("requirements.txt", content)
+        z.writestr("requirements.txt", st.session_state.get("content", ""))
         z.writestr("ai_explanation.txt", st.session_state["ai_explanation"])
     st.download_button(
-        label="📦 Download Snapshot (ZIP)",
+        label="📦 Download snapshot (ZIP)",
         data=buffer.getvalue(),
         file_name="FixEnvMini_Snapshot.zip",
         mime="application/zip",
@@ -111,7 +116,7 @@ st.markdown("---")
 st.markdown(
     """
     <div style='text-align: center; opacity: 0.7;'>
-    🚀 <b>FixEnv Mini</b> is a prototype of <b>Zarvah</b> — a self-healing developer platform built to automate and simplify coding environments.
+    🚀 <b>FixEnv Mini</b> is a prototype of <b>Zarvah</b> — a self-healing developer platform to automate and simplify coding environments.
     </div>
     """,
     unsafe_allow_html=True,
