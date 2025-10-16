@@ -8,12 +8,12 @@ st.caption("AI-powered environment conflict detector")
 
 st.markdown("---")
 
-st.subheader("Step 1️⃣  Paste your requirements.txt content")
+st.subheader("Step 1️⃣  Enter your Python dependencies")
 content = st.text_area(
-    "Paste below or type a few example dependencies:",
-    "numpy==1.20\nnumpy==1.25\npandas==1.3\npandas==1.4",
+    "Paste or type your package list (e.g., numpy==1.25, pandas==2.0.3):",
+    "numpy==1.20\nnumpy==1.25\npandas==1.3\nmatplotlib==3.7.1",
     height=180,
-    placeholder="e.g., numpy==1.25\npandas==2.0.3\nmatplotlib==3.7.1"
+    placeholder="Enter one package per line, like numpy==1.25"
 )
 
 conflicts = []
