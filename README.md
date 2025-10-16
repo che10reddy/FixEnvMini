@@ -24,7 +24,7 @@ It represents **Phase 1 of Zarvah**, a self-healing developer platform designed 
 ### Workflow Overview  
 From pasting dependencies to automatic detection, AI explanations, and downloadable snapshots.
 
-| 🧩 Home | ⚠️ Conflict Detected + Suggested Fix | 💡 AI Explaining |
+| 🧩 Home | ⚠️ Conflict Detected + Suggested Fix | 💡 AI Enquiry |
 |:--:|:--:|:--:|
 | ![Home](assets/home.png) | ![Conflict + Fix Preview](assets/detect_conflicts.png) | ![AI Enquiry](assets/ai_enquiry.png) |
 
