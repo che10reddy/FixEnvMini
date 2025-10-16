@@ -1,7 +1,6 @@
 # 🧩 FixEnv Mini — Zarvah P1 Prototype
 
-**FixEnv Mini** is an AI-powered environment conflict detector that automatically detects and explains Python dependency issues.  
-It represents **Phase 1 of Zarvah**, a self-healing developer platform designed to remove friction from software environments.
+**FixEnv Mini** is an AI-powered tool that detects, explains, and fixes Python environment conflicts — prototype for Zarvah’s self-healing developer platform.
 
 ---
 
