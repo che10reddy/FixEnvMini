@@ -6,7 +6,7 @@ import difflib
 # Title & Branding
 # -----------------------------
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
-st.title("🧩 FixEnv Mini")
+st.title("FixEnv Mini")
 st.caption("AI-powered environment conflict detector")
 
 st.markdown("---")
