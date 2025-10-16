@@ -4,9 +4,7 @@ import difflib
 
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
 st.title("🧩 FixEnv Mini")
-st.caption("AI-powered environment conflict detector")
-
-st.markdown("---")
+st.caption("AI-powered tool that detects and explains Python environment conflicts")
 
 st.subheader("Step 1️⃣  Enter your Python dependencies")
 content = st.text_area(
