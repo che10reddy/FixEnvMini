@@ -16,3 +16,20 @@ Deployed on **Streamlit Cloud** — paste your requirements.txt, detect version 
 - Integrates with OpenAI API to explain and suggest fixes.
 - Generates a before/after diff preview.
 - Allows exporting a full snapshot as a ZIP file.
+
+---
+
+## 🖼️ Screenshots
+
+### Workflow Overview  
+From pasting dependencies to automatic detection, AI explanations, and downloadable snapshots.
+
+| 🧩 Home | ⚠️ Conflict Detected + Suggested Fix | 💡 AI Explaining |
+|:--:|:--:|:--:|
+| ![Home](assets/home.png) | ![Conflict + Fix Preview](assets/detect_conflicts.png) | ![AI Explaining](assets/ai_explaining.png) |
+
+| 🧠 AI Explanation (Part 1) | 🧩 AI Explanation (Part 2) | 📦 Snapshot Download |
+|:--:|:--:|:--:|
+| ![AI Explained 1](assets/ai_explained_1.png) | ![AI Explained 2](assets/ai_explained_2.png) | ![Download](assets/snapshot_download.png) |
+
+> *FixEnv Mini* walks users from conflict detection → AI reasoning → final export in seconds.
