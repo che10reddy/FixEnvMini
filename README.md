@@ -12,7 +12,7 @@ It represents **Phase 1 of Zarvah**, a self-healing developer platform designed 
 
 ## ⚙️ Features
 - Paste or type dependencies directly into the app.
-- Auto-detects and highlights version conflicts.
+- Quickly detects and highlights version conflicts with one click.
 - Integrates with OpenAI API to explain and suggest fixes.
 - Generates a before/after diff preview.
 - Allows exporting a full snapshot as a ZIP file.
