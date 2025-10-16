@@ -6,7 +6,7 @@ It represents **Phase 1 of Zarvah**, a self-healing developer platform designed 
 ---
 
 ## 🌐 Live Demo
-Deployed on **Streamlit Cloud** — paste your requirements.txt, detect version conflicts, and let AI explain the fixes.
+👉 [Launch on Streamlit Cloud](https://fixenvmini-zarvahp1.streamlit.app)
 
 ---
 
@@ -26,7 +26,7 @@ From pasting dependencies to automatic detection, AI explanations, and downloada
 
 | 🧩 Home | ⚠️ Conflict Detected + Suggested Fix | 💡 AI Explaining |
 |:--:|:--:|:--:|
-| ![Home](assets/home.png) | ![Conflict + Fix Preview](assets/detect_conflicts.png) | ![AI Explaining](assets/ai_explaining.png) |
+| ![Home](assets/home.png) | ![Conflict + Fix Preview](assets/detect_conflicts.png) | ![AI Enquiry](assets/ai_enquiry.png) |
 
 | 🧠 AI Explanation (Part 1) | 🧩 AI Explanation (Part 2) | 📦 Snapshot Download |
 |:--:|:--:|:--:|
