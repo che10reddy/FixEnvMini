@@ -1,5 +1,5 @@
 import streamlit as st
-from openai import OpenAI
+import openai
 import difflib
 
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
