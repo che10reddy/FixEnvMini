@@ -1,7 +1,7 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import difflib
-import io, zipfile
+import io,zipfile
 
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
 st.title("🧩 FixEnv Mini")
