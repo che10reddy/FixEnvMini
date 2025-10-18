@@ -1,11 +1,15 @@
 import streamlit as st
 import openai
 import difflib
+import io, zipfile
 
 st.set_page_config(page_title="FixEnv Mini — Zarvah P1", page_icon="🧠", layout="centered")
 st.title("🧩 FixEnv Mini")
 st.caption("AI-powered tool that detects and explains Python environment conflicts")
 
+# -----------------------------
+# Step 1: Input
+# -----------------------------
 st.subheader("Step 1️⃣  Enter your Python dependencies")
 content = st.text_area(
     "Paste or type your package list (e.g., numpy==1.25, pandas==2.0.3):",
@@ -20,6 +24,9 @@ ai_explanation = ""
 st.markdown("---")
 st.subheader("Step 2️⃣  Detect conflicts")
 
+# -----------------------------
+# Step 2: Detect Conflicts
+# -----------------------------
 if st.button("🔍 Detect Conflicts"):
     lines = [l.strip() for l in content.splitlines() if "==" in l]
     pkgs = {}
@@ -42,26 +49,32 @@ if st.button("🔍 Detect Conflicts"):
         st.success("✅ No version conflicts detected!")
         st.session_state["conflicts"] = []
 
+# -----------------------------
+# Step 3: AI Explanation
+# -----------------------------
 if "conflicts" in st.session_state and st.session_state["conflicts"]:
     st.markdown("---")
     st.subheader("Step 3️⃣  AI Explanation")
 
     if st.button("💡 Explain with AI"):
-        client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+        openai.api_key = st.secrets["OPENAI_API_KEY"]
         prompt = (
             "Explain these Python dependency conflicts and how to fix them clearly:\n"
             + "\n".join(st.session_state["conflicts"])
         )
         with st.spinner("Contacting AI assistant..."):
-            response = client.chat.completions.create(
+            response = openai.ChatCompletion.create(
                 model="gpt-4o-mini",
                 messages=[{"role": "user", "content": prompt}]
             )
-        ai_explanation = response.choices[0].message.content
+        ai_explanation = response["choices"][0]["message"]["content"]
         st.success("🧠 AI Explanation:")
         st.write(ai_explanation)
         st.session_state["ai_explanation"] = ai_explanation
 
+# -----------------------------
+# Step 4: Suggested Fix Preview
+# -----------------------------
 if "conflicts" in st.session_state and st.session_state["conflicts"]:
     st.markdown("---")
     st.subheader("Step 4️⃣  Suggested Fix Preview")
@@ -73,8 +86,10 @@ if "conflicts" in st.session_state and st.session_state["conflicts"]:
     )
     st.code("\n".join(diff))
 
+# -----------------------------
+# Step 5: Snapshot Download
+# -----------------------------
 if "ai_explanation" in st.session_state and st.session_state["ai_explanation"]:
-    import io, zipfile
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w") as z:
         z.writestr("requirements.txt", content)
@@ -86,6 +101,9 @@ if "ai_explanation" in st.session_state and st.session_state["ai_explanation"]:
         mime="application/zip",
     )
 
+# -----------------------------
+# Footer Branding
+# -----------------------------
 st.markdown("---")
 st.markdown(
     """
