@@ -15,9 +15,6 @@
 - Generate exportable `.zfix` snapshots with fixed dependencies
 - Works in browser (Web UI), terminal (CLI), and CI/CD pipelines
 
-### Tagline
-> "Python environments, fixed"
-
 ---
 
 ## 🏗️ Architecture Overview
@@ -508,12 +505,4 @@ sequenceDiagram
 3. **24-Hour Result Caching** - Cache key uses commit SHA for accuracy
 4. **Optimized AI Prompt** - Reduced from ~3,500 to ~1,200 characters
 5. **IP-Based Rate Limiting** - Prevents API abuse
-
----
-
-### Long-Term Vision (Avastha)
-- Full application runtime state capture into portable capsules
-- AI-assisted environment diagnosis and repair
-- Cross-platform support (macOS, Windows, Linux)
-- Enterprise reproducibility and auditability
 
