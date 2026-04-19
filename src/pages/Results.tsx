@@ -285,18 +285,6 @@ const Results = () => {
     });
   };
 
-  const handleViewScore = () => {
-    navigate("/reproducibility", {
-      state: {
-        reproducibilityScore: analysisData.reproducibilityScore,
-        issues: issues,
-        dependencyDiff: dependencyDiff,
-        vulnerabilities: vulnerabilities,
-      }
-    });
-  };
-
-
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Header />
@@ -398,14 +386,6 @@ const Results = () => {
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                  <Button
-                    onClick={handleViewScore}
-                    size="lg"
-                    className="h-14 px-8 font-semibold gap-2 text-base"
-                  >
-                    View Reproducibility Score
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
                   <Button
                     onClick={() => navigate("/")}
                     size="lg"
