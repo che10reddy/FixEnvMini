@@ -285,18 +285,6 @@ const Results = () => {
     });
   };
 
-  const handleViewScore = () => {
-    navigate("/reproducibility", {
-      state: {
-        reproducibilityScore: analysisData.reproducibilityScore,
-        issues: issues,
-        dependencyDiff: dependencyDiff,
-        vulnerabilities: vulnerabilities,
-      }
-    });
-  };
-
-
   return (
     <main className="min-h-screen bg-background flex flex-col">
       <Header />
