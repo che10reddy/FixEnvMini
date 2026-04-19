@@ -387,14 +387,6 @@ const Results = () => {
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 mt-6">
                   <Button
-                    onClick={handleViewScore}
-                    size="lg"
-                    className="h-14 px-8 font-semibold gap-2 text-base"
-                  >
-                    View Reproducibility Score
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                  <Button
                     onClick={() => navigate("/")}
                     size="lg"
                     variant="outline"
