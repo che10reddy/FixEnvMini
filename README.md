@@ -3,7 +3,6 @@
 **Catch Python dependency conflicts, missing version pins, and CVEs in any GitHub repo — in seconds.**
 
 [![npm](https://img.shields.io/npm/v/fixenv-cli.svg)](https://www.npmjs.com/package/fixenv-cli)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](#license)
 
 🌐 **Try it now:** [fixenvmini.lovable.app](https://fixenvmini.lovable.app)
 
@@ -32,8 +31,6 @@ npx fixenv-cli scan https://github.com/pallets/flask
 # JSON output (for scripts / CI)
 npx fixenv-cli scan https://github.com/pallets/flask --json
 ```
-
-> 💡 A `pipx`-installable Python package is on the roadmap. For now the CLI is a thin Node wrapper around the same hosted API.
 
 ### 3. CI/CD (GitHub Actions)
 
@@ -111,38 +108,16 @@ Security Vulnerabilities:
 ## FAQ
 
 **Why `npx` and not `pip`?**
-The CLI is currently a Node wrapper around our hosted API — nothing about it requires Python locally, which made it fast to ship. A `pipx`-installable Python package is on the roadmap so Python users can use idiomatic tooling.
+The CLI is currently a Node wrapper around our hosted API — nothing about it requires Python locally, which made it fast to ship.
 
 **Is my code sent to a server?**
 Only public dependency files (e.g. `requirements.txt`) are fetched from GitHub for analysis — never your source code. Analysis runs on a hosted backend (Lovable Cloud + Google Gemini). For privacy-sensitive workflows, see the roadmap below.
 
-**Does it work on private repos?**
-Not in the current MVP — only public GitHub repos. Private repo support and a local-first mode are on the roadmap.
-
 **What's a `.zfix` file?**
 A portable JSON snapshot containing your fixed dependency file, the reproducibility score, detected issues, suggested fixes, and metadata. It's designed to be shareable and re-applicable to recreate a working environment.
-
-**Who built this?**
-Solo project by Reddy. Questions / feedback: **che10guduru@gmail.com**.
-
----
-
-## Roadmap
-
-- [ ] `pipx install fixenv` — native Python CLI
-- [ ] **Local-first mode** — run dependency parsing and OSV lookups entirely on your machine; AI analysis becomes opt-in
-- [ ] **MCP / Claude Code skill** — invoke FixEnv as a tool from your coding agent (no hosted server involved)
-- [ ] Private repo support (GitHub token auth)
-- [ ] Self-hostable Docker image
 
 ---
 
 ## Architecture
 
 This is a React + Vite frontend with serverless edge functions for analysis. Full architecture, edge function specs, database schema, and AI prompt details live in **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**.
-
----
-
-## License
-
-MIT
