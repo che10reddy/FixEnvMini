@@ -1,8 +1,12 @@
-**URL**: https://fixenvmini.lovable.app
+# FixEnv Mini — Architecture
+
+> Internal/technical documentation. For user-facing docs (install, usage, FAQ), see the [README](../README.md).
+>
+> **Live app:** https://fixenvmini.lovable.app
 
 ---
 
-# FixEnv Mini - Complete Project Documentation
+## Project Overview
 
 ## 📋 Project Overview
 
